@@ -2,7 +2,7 @@
 CCTC
 ===========================
 
-This is a simple CTC library suitable for use with PyTorch.
+This is a simple multicore CTC library suitable for use with PyTorch.
 
 Installation
 ------------
@@ -18,7 +18,8 @@ Usage
 There are two primary functions, ``cctc_align_targets`` and
 ``cctc_align_targets_batched``. The first takes a ``length x depth``
 tensor, while the second takes a ``batch x length x depth`` tensor
-and applies allignment to each batch element.
+and applies allignment to each batch element. Operations over
+batches are parallelized using ``std::async``.
 
 A call to ``cctc_align_targets(output, source, targets)`` aligns the
 source with the targets. The source length must be equal to, or
@@ -29,4 +30,3 @@ dimension and the aligned result returned in the output tensor. Note
 that the result is not returned as a return value.
 
 See ``cctc_test.py`` for a simple example of usage.
-
